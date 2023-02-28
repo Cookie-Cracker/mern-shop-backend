@@ -1,0 +1,67 @@
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Done !!!"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Done !!!"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Done !!!"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Done !!!"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Done !!!"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Done !!!"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Done !!!"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Role: admin added."}
+{"level":"info","message":"Role: moderator added."}
+{"level":"info","message":"Role: user added."}
+{"level":"info","message":"Done !!!"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Role: admin added."}
+{"level":"info","message":"Role: moderator added."}
+{"level":"info","message":"Role: user added."}
+{"level":"info","message":"Done !!!"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Role: ad added."}
+{"level":"info","message":"Role: moderator added."}
+{"level":"info","message":"Role: user added."}
+{"level":"info","message":"Done !!!"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Role: admin added."}
+{"level":"info","message":"Role: moderator added."}
+{"level":"info","message":"Role: user added."}
+{"level":"info","message":"Done !!!"}
+{"_message":"Role validation failed","errors":{"name":{"kind":"minlength","message":"Path `name` (`user`) is shorter than the minimum allowed length (5).","name":"ValidatorError","path":"name","properties":{"message":"Path `name` (`user`) is shorter than the minimum allowed length (5).","minlength":5,"path":"name","type":"minlength","value":"user"},"value":"user"}},"level":"error","message":"Role validation failed: name: Path `name` (`user`) is shorter than the minimum allowed length (5).","name":"ValidationError"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Role: adm added."}
+{"level":"info","message":"Role: moderator added."}
+{"level":"info","message":"Role: user added."}
+{"level":"info","message":"Done !!!"}
+{"_message":"Role validation failed","errors":{"name":{"kind":"minlength","message":"Path `name` (`adm`) is shorter than the minimum allowed length (5).","name":"ValidatorError","path":"name","properties":{"message":"Path `name` (`adm`) is shorter than the minimum allowed length (5).","minlength":5,"path":"name","type":"minlength","value":"adm"},"value":"adm"}},"level":"error","message":"Role validation failed: name: Path `name` (`adm`) is shorter than the minimum allowed length (5).","name":"ValidationError"}
+{"_message":"Role validation failed","errors":{"name":{"kind":"minlength","message":"Path `name` (`user`) is shorter than the minimum allowed length (5).","name":"ValidatorError","path":"name","properties":{"message":"Path `name` (`user`) is shorter than the minimum allowed length (5).","minlength":5,"path":"name","type":"minlength","value":"user"},"value":"user"}},"level":"error","message":"Role validation failed: name: Path `name` (`user`) is shorter than the minimum allowed length (5).","name":"ValidationError"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Role: admin added."}
+{"level":"info","message":"Role: moderator added."}
+{"level":"info","message":"Role: user added."}
+{"level":"info","message":"Done !!!"}
+{"address":"localhost:27017","level":"error"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Seeding Roles..."}
+{"level":"info","message":"Role: admin added."}
+{"level":"info","message":"Role: moderator added."}
+{"level":"info","message":"Role: user added."}
+{"level":"info","message":"Done !!!"}
