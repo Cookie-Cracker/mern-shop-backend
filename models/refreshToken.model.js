@@ -27,8 +27,7 @@ const refreshTokenSchema = new mongoose.Schema({
 refreshTokenSchema.statics.createToken = async function (user) {
     let expiredAt = new Date()
 
-    // expiredAt.setDate(expiredAt.getDate() + parseInt(process.env.REFRESH_TOKEN_EXPIRATION_DAYS))
-    // expiredAt.setDate(expiredAt.getDate() + parseInt(_jwt.refresh_token_exp_in_days))
+
     expiredAt.setSeconds(
         expiredAt.getSeconds() + parseInt(_jwt.refresh_token_exp_in_seconds)
     )

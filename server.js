@@ -1,6 +1,5 @@
 const app = require('./app')
 const setupDb = require('./start/db')
-
 const winston = require("winston");
 require('./start/logging')()
 const http = require('http');
@@ -15,11 +14,12 @@ setupDb()
 console.log('Loading..')
 winston.warn(`Environment: ${process.env.NODE_ENV}`)
 
-
 mongoose.connection.once('open', () => {
 
     server.listen(port, () => {
-        winston.info(`Listening on PORT ${port}. Visit http://localhost:${port}/ in your browser.`)
+        process.env.NODE_ENV === 'production'
+            ? winston.info(`Visit: render.com`)
+            : winston.info(`Listening on PORT ${port}. Visit http://localhost:${port}/ in your browser.`)
     })
 })
 mongoose.connection.on('error', err => {

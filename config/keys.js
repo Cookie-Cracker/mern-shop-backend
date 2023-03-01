@@ -8,7 +8,7 @@ module.exports = {
   port: process.env.PORT || 3000,
   database: {
     url: process.env.MONGO_URI,
-    name: process.env.MONGO_DB_NAME
+    mongo_atlas: process.env.MONGO_ATLAS_URI
   },
   _jwt: {
     private_key: process.env.JWT_PRIVATE_KEY,
