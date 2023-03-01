@@ -1,5 +1,6 @@
 node_modules
 .env
+.log
 uploads/*.jpeg
 uploads/*.jpg
 uploads/*.png

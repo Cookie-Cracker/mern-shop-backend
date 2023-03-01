@@ -2767,3 +2767,24 @@
 {"level":"info","message":"CORS Origin: undefined"}
 {"level":"info","message":"CORS Origin: http://localhost:3000"}
 {"level":"info","message":"CORS Origin: http://localhost:3000"}
+{"level":"warn","message":"Environment: development"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Listening on PORT 3900. Visit http://localhost:3900/ in your browser."}
+{"level":"info","message":"CORS Origin: http://localhost:3000"}
+{"level":"info","message":"CORS Origin: http://localhost:3000"}
+{"level":"warn","message":"Environment: development"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Listening on PORT 3900. Visit http://localhost:3900/ in your browser."}
+{"level":"info","message":"CORS Origin: http://localhost:3000"}
+{"level":"info","message":"CORS Origin: http://localhost:3000"}
+{"level":"info","message":"CORS Origin: http://localhost:3000"}
+{"level":"info","message":"CORS Origin: http://localhost:3000"}
+{"level":"info","message":"CORS Origin: http://localhost:3000"}
+{"level":"info","message":"CORS Origin: http://localhost:3000"}
+{"level":"info","message":"CORS Origin: http://localhost:3000"}
+{"level":"info","message":"CORS Origin: http://localhost:3000"}
+{"level":"info","message":"CORS Origin: http://localhost:3000"}
+{"level":"info","message":"CORS Origin: http://localhost:3000"}
+{"level":"warn","message":"Environment: development"}
+{"level":"info","message":"Connnected to mongodb://localhost:27017/mern-restaurant"}
+{"level":"info","message":"Listening on PORT 3900. Visit http://localhost:3900/ in your browser."}
