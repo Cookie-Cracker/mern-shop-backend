@@ -1,15 +1,17 @@
 const cors = require('cors');
 const winston = require("winston");
 
+
+let allowedOrigins
 if (process.env.NODE_ENV === 'production') {
 
-    const allowedOrigins = [
-        'http://localhost:3000',
+    allowedOrigins = [
+        'https://mern-shop-sbtp.onrender.com',
         // 'https://www.dandrepairshop.com',
         // 'https://dandrepairshop.com'
     ]
 } else {
-    const allowedOrigins = [
+    allowedOrigins = [
         'http://localhost:3000',
         // 'https://www.dandrepairshop.com',
         // 'https://dandrepairshop.com'
