@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const slug = require('mongoose-slug-generator');
 const { Schema } = mongoose;
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const options = {
   separator: '-',
@@ -64,7 +65,7 @@ const ProductSchema = new Schema({
 });
 
 
-
+ProductSchema.plugin(mongoosePaginate)
 const Product = mongoose.model('Product', ProductSchema);
 
 //TODO: Product JOI Validate

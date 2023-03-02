@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.get('/', productController.getAllProducts)
 router.get('/bybrand', productController.productsByBrand)
+router.get('/search', productController.queryProducts)
 
 router.post('/',
   upload.single('image'),

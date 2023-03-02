@@ -1,5 +1,6 @@
 const Brand = require('../models/brand.model')
 const getPagination = require('../utils/getPagination')
+const myCustomLabels = require('../helpers/customPaginatedLabels')
 
 const queryBrands = async (req, res) => {
     const { page, size, brand } = req.query

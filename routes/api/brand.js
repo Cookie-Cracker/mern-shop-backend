@@ -10,8 +10,8 @@ const router = express.Router()
 
 
 router.get('/', brandController.getAllBrands)
-router.get('/search', brandController.searchBrands)
-router.get('/q', brandController.queryBrands)
+// router.get('/search', brandController.searchBrands)
+router.get('/search', brandController.queryBrands)
 router.get('/:id', brandController.getById)
 router.post('/', brandController.addNewBrand)
 router.patch('/', brandController.updateBrand)

@@ -1,14 +1,69 @@
 const Product = require('../models/product.model')
 const Brand = require('../models/brand.model')
 const Prduct = require('../models/product.model')
+const { myCustomLabels } = require('../helpers/customPaginatedLabels')
+const { getProductsQuery } = require('../helpers/queries')
+const getPagination = require('../utils/getPagination')
+const { query } = require('express')
+
 
 const getAllProducts = async (req, res) => {
+
 
     const products = await Product.find().select('-__v').lean()
     // if (!products?.length) {
     //     return res.status(200).json({ message: 'No products found' })
     // }
     res.json(products)
+
+}
+
+const queryProducts = async (req, res) => {
+
+    const myCustomLabels = {
+        totalDocs: 'itemCount',
+        docs: 'itemsList',
+        limit: 'perPage',
+        page: 'currentPage',
+        nextPage: 'next',
+        prevPage: 'prev',
+        totalPages: 'pageCount',
+        pagingCounter: 'slNo',
+        meta: 'paginator',
+    };
+    let { name, minPrice, maxPrice, page, size } = req.query
+    minPrice = minPrice <= 0 || !minPrice ? 0 : minPrice
+    page = page < 0 ? 0 : page
+
+
+    // const qByName =
+    //     name
+    //         ? { name: { $regex: new RegExp(name), $options: 'i' } }
+    //         : {}
+    const filterName =
+        name
+            ? { name: { $regex: new RegExp(name), $options: 'i' } }
+            : {}
+    const filterPrice =
+        minPrice && maxPrice
+            ? { price: { $gte: minPrice, $lte: maxPrice } }
+            : {}
+    const q = { ...filterName, ...filterPrice }
+    // const q = {
+    //     isActive: true,
+    //     name: filterName.name,
+    //     price: filterPrice.price
+    // }
+
+
+
+
+    const { limit, offset } = getPagination(page, size)
+    const basicQuery = getProductsQuery(name, minPrice, maxPrice)
+    Product.paginate(q, { limit, offset, customLabels: myCustomLabels, sort: { name: 1 } })
+        .then((data) => {
+            res.json(data)
+        })
 
 }
 
@@ -86,6 +141,7 @@ const deactivateProduct = async (req, res) => {
 
 module.exports = {
     getAllProducts,
+    queryProducts,
     addNewProduct,
     updateProduct,
     productsByBrand,
