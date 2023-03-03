@@ -31,7 +31,9 @@ const queryProducts = async (req, res) => {
         pagingCounter: 'slNo',
         meta: 'paginator',
     };
-    let { name, minPrice, maxPrice, page, size } = req.query
+    let { name, minPrice, maxPrice, isActive, page, size } = req.query
+    // console.log('maxPrice', maxPrice)
+    // console.log('minPrice', minPrice)
     minPrice = minPrice <= 0 || !minPrice ? 0 : minPrice
     page = page < 0 ? 0 : page
 
@@ -48,19 +50,28 @@ const queryProducts = async (req, res) => {
         minPrice && maxPrice
             ? { price: { $gte: minPrice, $lte: maxPrice } }
             : {}
-    const q = { ...filterName, ...filterPrice }
-    // const q = {
+
+
+    const min = { price: { $gte: minPrice } }
+    const max = { price: { $lte: maxPrice } }
+
+
+    // const q = { ...filterName, ...filterPrice }
+    let q = {
+        price: filterPrice.price,
+        // name: filterName.name
+    }
+
+    let queryOK = { $and: [filterName, min, max] }
+    // let queryOK = { $or: [filterName, filterPrice] }
+    // // const q = {
     //     isActive: true,
     //     name: filterName.name,
     //     price: filterPrice.price
     // }
 
-
-
-
     const { limit, offset } = getPagination(page, size)
-    const basicQuery = getProductsQuery(name, minPrice, maxPrice)
-    Product.paginate(q, { limit, offset, customLabels: myCustomLabels, sort: { name: 1 } })
+    Product.paginate(queryOK, { limit, offset, customLabels: myCustomLabels, sort: { name: 1 } })
         .then((data) => {
             res.json(data)
         })
