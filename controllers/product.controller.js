@@ -19,7 +19,7 @@ const getAllProducts = async (req, res) => {
 }
 
 const queryProducts = async (req, res) => {
-
+    console.log('queryProducts')
     const myCustomLabels = {
         totalDocs: 'itemCount',
         docs: 'itemsList',
@@ -35,7 +35,7 @@ const queryProducts = async (req, res) => {
     // console.log('maxPrice', maxPrice)
     // console.log('minPrice', minPrice)
     minPrice = minPrice <= 0 || !minPrice ? 0 : minPrice
-    page = page < 0 ? 0 : page
+    page = page < 0 ? 0 : 1
 
 
     // const qByName =
@@ -55,6 +55,9 @@ const queryProducts = async (req, res) => {
     const min = { price: { $gte: minPrice } }
     const max = { price: { $lte: maxPrice } }
 
+    console.log('min', min)
+    console.log('name', filterName)
+    console.log('max', max)
 
     // const q = { ...filterName, ...filterPrice }
     let q = {
@@ -73,6 +76,8 @@ const queryProducts = async (req, res) => {
     const { limit, offset } = getPagination(page, size)
     Product.paginate(queryOK, { limit, offset, customLabels: myCustomLabels, sort: { name: 1 } })
         .then((data) => {
+            console.log('data.length', data.itemsList.length)
+            // console.log('data', data)
             res.json(data)
         })
 

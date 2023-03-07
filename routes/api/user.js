@@ -29,11 +29,11 @@ const Role = require('../../helpers/role')
 //     userController.moderatorBoard)
 
 // router.use(authJwt.verifyToken)
-router.route('/')
-    .get(usersController.getAllUsers)
-    .post(usersController.addNewUser)
-    .delete(usersController.deleteUser)
-
+router
+    .get('/', usersController.getAllUsers)
+    .get('/:id', usersController.getMe)
+    .post('/', usersController.addNewUser)
+    .delete('/', usersController.deleteUser)
 
 
 module.exports = router

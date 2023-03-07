@@ -71,6 +71,13 @@ const addNewUser = async (req, res) => {
     //     res.status(400).json({ message: 'Invalid user data received' })
     // }
 }
+const getMe = async (req, res) => {
+    const { id } = req.params
+    if (!id) if (!id) return res.status(400).json({ message: 'User ID Required.' })
+    const user = await User.findById(id).populate('roles').select('-__v').exec()
+    if (!user) return res.status(400).json({ message: 'User Not Found' })
+    res.json(user)
+}
 
 const deleteUser = async (req, res) => {
     const { id } = req.body
@@ -91,5 +98,6 @@ const deleteUser = async (req, res) => {
 module.exports = {
     getAllUsers,
     addNewUser,
+    getMe,
     deleteUser
 }

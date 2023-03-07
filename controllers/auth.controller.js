@@ -8,6 +8,7 @@ const User = require('../models/user.model')
 const Role = require('../models/role.model')
 const RefreshToken = require('../models/refreshToken.model')
 const { json } = require('express')
+const LoginHistory = require('../models/login.model')
 
 
 //TODO:asyncHandler
@@ -81,6 +82,10 @@ const signIn = async (req, res, next) => {
     const validPassword = await bcrypt.compare(password, user.password)
     if (!validPassword) return res.status(401).send('Unauthorized')
 
+    user.logins.push(new Date())
+    const loginH = new LoginHistory({ userid: user._id })
+    loginH.save()
+    await user.save()
 
     const accessToken = await user.generateAccessToken()
 

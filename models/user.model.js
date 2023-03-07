@@ -24,6 +24,9 @@ const userSchema = new mongoose.Schema(
             type: String,
             maxlength: 10,
         },
+        logins: [
+            { type: Date }
+        ],
 
         //TODO: add active to users models
         roles: [
@@ -53,6 +56,7 @@ userSchema.methods.generateAccessToken = async function () {
     const token = jwt.sign(
         {
             "UserInfo": {
+                "id": this._id,
                 "email": this.email,
                 "roles": authorities
             }

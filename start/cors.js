@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'production') {
     allowedOrigins = [
         'http://localhost:3000',
         // 'https://www.dandrepairshop.com',
-        // 'https://dandrepairshop.com'
+        //      'https://dandrepairshop.com'
     ]
 
 }
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const corsOptions = {
     origin: (origin, callback) => {
-        winston.info(`CORS Origin: ${origin}`)
+        // winston.info(`CORS Origin: ${origin}`)
         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
             callback(null, true)
         } else {

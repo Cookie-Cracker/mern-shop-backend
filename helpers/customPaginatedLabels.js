@@ -1,6 +1,6 @@
 module.exports = {
 
-    myCustomLabels: {
+    labels: {
 
         totalDocs: 'itemCount',
         docs: 'itemsList',
