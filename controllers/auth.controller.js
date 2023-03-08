@@ -34,7 +34,7 @@ const signUp = async (req, res, next) => {
             return;
         }
         const reqRoles = req.body.roles
-        console.log('reqRoles', reqRoles)
+        // console.log('reqRoles', reqRoles)
         if (reqRoles) {
             Role.find(
                 {
@@ -75,7 +75,7 @@ const signIn = async (req, res, next) => {
     if (!email || !password) return res.status(400).send('Username and password are required.')
 
     let user = await User.findOne({ email: email }).populate('roles', '-__v').exec()
-    console.log('user login', user)
+    // console.log('user login', user)
 
     if (!user) return res.status(401).send('Unauthorized')
 
@@ -167,7 +167,7 @@ const signIn = async (req, res, next) => {
 
 const refresh = async (req, res) => {
     const cookies = req.cookies
-    console.log('cookies', req.cookies)
+    // console.log('cookies', req.cookies)
 
     if (!cookies?.jwt) return res.status(401).json({ message: 'Unauthorized Cookie' })
 
@@ -178,7 +178,7 @@ const refresh = async (req, res) => {
         if (!refreshToken) return res.status(403).json({ message: 'Forbidden1.' })
 
         if (RefreshToken.verifyExpiration(refreshToken)) {
-            console.log('will errase')
+            // console.log('will errase')
             await RefreshToken.findByIdAndRemove(refreshToken._id, { useFindAndModify: false }).exec();
             return res.status(403).json({ message: 'Refresh token expired1.' })
 
@@ -191,7 +191,7 @@ const refresh = async (req, res) => {
         // res.send('wath')
 
     } catch (error) {
-        console.log('error', error)
+        // console.log('error', error)
         res.status(500).json(
             { message: 'Something weird here' }
         )
@@ -201,12 +201,12 @@ const refresh = async (req, res) => {
 const logout = (req, res) => {
     const cookies = req.cookies
     if (!cookies?.jwt) {
-        console.log('no Cookie')
+        // console.log('no Cookie')
         return res.sendStatus(240)
     }
 
     res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true })
-    console.log('Logouttttttttttttttttttttttttttttttt')
+    // console.log('Logouttttttttttttttttttttttttttttttt')
     res.json({ message: 'Cookie cleared' })
     // res.status(400).json({ message: "Error Loggin Out" })
 }

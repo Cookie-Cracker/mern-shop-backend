@@ -1,7 +1,7 @@
 const Product = require('../models/product.model')
 const Brand = require('../models/brand.model')
 const Prduct = require('../models/product.model')
-const { myCustomLabels } = require('../helpers/customPaginatedLabels')
+const { labels } = require('../helpers/customPaginatedLabels')
 const { getProductsQuery } = require('../helpers/queries')
 const getPagination = require('../utils/getPagination')
 const { query } = require('express')
@@ -11,15 +11,12 @@ const getAllProducts = async (req, res) => {
 
 
     const products = await Product.find().select('-__v').lean()
-    // if (!products?.length) {
-    //     return res.status(200).json({ message: 'No products found' })
-    // }
+
     res.json(products)
 
 }
 
 const queryProducts = async (req, res) => {
-    console.log('queryProducts')
     const myCustomLabels = {
         totalDocs: 'itemCount',
         docs: 'itemsList',
@@ -32,16 +29,10 @@ const queryProducts = async (req, res) => {
         meta: 'paginator',
     };
     let { name, minPrice, maxPrice, isActive, page, size } = req.query
-    // console.log('maxPrice', maxPrice)
-    // console.log('minPrice', minPrice)
+
     minPrice = minPrice <= 0 || !minPrice ? 0 : minPrice
     page = page < 0 ? 0 : 1
 
-
-    // const qByName =
-    //     name
-    //         ? { name: { $regex: new RegExp(name), $options: 'i' } }
-    //         : {}
     const filterName =
         name
             ? { name: { $regex: new RegExp(name), $options: 'i' } }
@@ -55,29 +46,19 @@ const queryProducts = async (req, res) => {
     const min = { price: { $gte: minPrice } }
     const max = { price: { $lte: maxPrice } }
 
-    console.log('min', min)
-    console.log('name', filterName)
-    console.log('max', max)
 
-    // const q = { ...filterName, ...filterPrice }
     let q = {
         price: filterPrice.price,
-        // name: filterName.name
+
     }
 
     let queryOK = { $and: [filterName, min, max] }
-    // let queryOK = { $or: [filterName, filterPrice] }
-    // // const q = {
-    //     isActive: true,
-    //     name: filterName.name,
-    //     price: filterPrice.price
-    // }
+
 
     const { limit, offset } = getPagination(page, size)
     Product.paginate(queryOK, { limit, offset, customLabels: myCustomLabels, sort: { name: 1 } })
         .then((data) => {
-            console.log('data.length', data.itemsList.length)
-            // console.log('data', data)
+
             res.json(data)
         })
 
@@ -147,7 +128,37 @@ const productsByBrand = async (req, res) => {
         }
     ])
 
+
     res.status(200).json(products)
+}
+const productsByBrandPaginated = async (req, res) => {
+
+    const { brandId } = req.body
+    let page = 1
+    let size = 5
+
+    const brand = await Brand.findOne({ _id: brandId, isActive: true })
+
+    if (!brand) return res.status(404).json({ message: `Cant't find brand.` })
+
+    // const products = await Product.aggregate([
+    //     {
+    //         $match: {
+    //             isActive: true,
+    //             brand: brand._id
+    //         }
+    //     }
+    // ])
+
+    let q = { brand: brand._id }
+    console.log('q', q)
+    const { limit, offset } = getPagination(page, size)
+    Product.paginate(q, { limit, offset, customLabels: labels, sort: { name: 1 } })
+        .then((data) => {
+            res.json(data)
+        })
+
+    // res.status(200).json(products)
 }
 
 const deactivateProduct = async (req, res) => {
@@ -161,6 +172,7 @@ module.exports = {
     addNewProduct,
     updateProduct,
     productsByBrand,
+    productsByBrandPaginated,
     deactivateProduct
 
 }

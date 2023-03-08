@@ -51,7 +51,7 @@ userSchema.methods.generateAccessToken = async function () {
 
         authorities.push(thisuser.roles[i].name)
     }
-    console.log('authorities', authorities)
+    // console.log('authorities', authorities)
 
     const token = jwt.sign(
         {
@@ -67,7 +67,7 @@ userSchema.methods.generateAccessToken = async function () {
         // { expiresIn: '10m' }
         { expiresIn: _jwt.access_token_exp }
     )
-    console.log('generatedToken', token)
+    // console.log('generatedToken', token)
     return token
 }
 userSchema.methods.generateRefreshToken = function () {

@@ -4,8 +4,8 @@ const keys = require('../config/keys')
 
 const { database } = keys
 const setupMongoDb = async () => {
-    // mongoose.set("debug", true);
-    // mongoose.set("strictQuery", false);
+    mongoose.set("debug", true);
+    mongoose.set("strictQuery", false);
     try {
 
         const db = process.env.NODE_ENV === 'production'

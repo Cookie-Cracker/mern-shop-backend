@@ -2,10 +2,12 @@ const Brand = require('../models/brand.model')
 const getPagination = require('../utils/getPagination')
 const myCustomLabels = require('../helpers/customPaginatedLabels')
 
-const queryBrands = async (req, res) => {
-    const { page, size, brand } = req.query
-    console.log('brand', brand)
 
+const queryBrands = async (req, res) => {
+    const { page, size, brand, isActive } = req.query
+    console.log('queryBrands')
+    console.log('queryBrands')
+    console.log('isActive', isActive)
     const myCustomLabels = {
         totalDocs: 'itemCount',
         docs: 'itemsList',
@@ -17,29 +19,39 @@ const queryBrands = async (req, res) => {
         pagingCounter: 'slNo',
         meta: 'paginator',
     };
-    const qByName =
+    let active = isActive === 'true' ? true : false
+    let qByName =
         brand
             ? { name: { $regex: new RegExp(brand), $options: 'i' } }
             : {}
 
 
+
+
     const { limit, offset } = getPagination(page, size)
-    Brand.paginate(qByName, { limit, offset, customLabels: myCustomLabels, sort: { name: 1 } })
+
+    Brand.paginate({
+        isActive: active,
+        name: { $regex: new RegExp(brand), $options: 'i' }
+    },
+        { limit, offset, customLabels: myCustomLabels, sort: { name: 1 }, })
         .then((data) => {
+
             res.json({
                 data
-
             })
         })
 
+
 }
+
 
 
 const getAllBrands = async (req, res) => {
     try {
         const brands = await Brand.find({
             isActive: true
-        }).select('-__v');
+        })
 
         res.json(brands);
     } catch (error) {
@@ -51,7 +63,7 @@ const getAllBrands = async (req, res) => {
 
 const searchBrands = async (req, res) => {
     const { page, size, brand } = req.query
-    console.log('brand', brand)
+    console.log('brand1', brand)
 
     const condition =
         brand
@@ -124,11 +136,12 @@ const addNewBrand = async (req, res) => {
 }
 
 const updateBrand = async (req, res) => {
+    console.log('update?')
     const { id, name, description, isActive } = req.body
 
+    console.log('id', id)
     if (!id || !name || !description || typeof isActive !== 'boolean')
         return res.status(400).json({ message: 'All fields are required.' })
-
 
     const brand = await Brand.findById(id).exec()
     if (!brand) return res.status(400).json({ message: 'Brand not found.' })
@@ -161,13 +174,32 @@ const deleteBrand = async (req, res) => {
     }
 }
 
+const deactivateBrand = async (req, res) => {
+
+    const { id } = req.body
+    if (!id) return res.status(400).json({ message: 'Brand ID Required.' })
+    const brand = Brand.findById(id).exec()
+    if (!brand) return res.status(400).json({ message: 'Brand not Found' })
+
+    brand.isActive = false
+
+    const updateBrand = await brand.save()
+
+    res.json(`${updateBrand.name} deactivated.`)
+
+
+
+}
+
 
 module.exports = {
     getAllBrands,
     queryBrands,
+    // queryInactiveBrands,
     searchBrands,
     getById,
     addNewBrand,
     updateBrand,
-    deleteBrand
+    deleteBrand,
+    deactivateBrand
 }

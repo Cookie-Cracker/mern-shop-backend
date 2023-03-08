@@ -15,7 +15,7 @@ router.get('/search', brandController.queryBrands)
 router.get('/:id', brandController.getById)
 router.post('/', brandController.addNewBrand)
 router.patch('/', brandController.updateBrand)
-router.delete('/', brandController.deleteBrand)
+router.delete('/', brandController.deactivateBrand)
 
 
 
