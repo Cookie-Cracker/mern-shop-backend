@@ -174,16 +174,17 @@ const deleteBrand = async (req, res) => {
     }
 }
 
-const deactivateBrand = async (req, res) => {
+const toggleActive = async (req, res) => {
 
     const { id } = req.body
     if (!id) return res.status(400).json({ message: 'Brand ID Required.' })
-    const brand = Brand.findById(id).exec()
+    const brand = await Brand.findById(id).exec()
     if (!brand) return res.status(400).json({ message: 'Brand not Found' })
 
-    brand.isActive = false
+    brand.isActive = !brand.isActive
 
     const updateBrand = await brand.save()
+    // res.json(brand)
 
     res.json(`${updateBrand.name} deactivated.`)
 
@@ -201,5 +202,5 @@ module.exports = {
     addNewBrand,
     updateBrand,
     deleteBrand,
-    deactivateBrand
+    deactivateBrand: toggleActive
 }
