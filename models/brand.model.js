@@ -15,7 +15,8 @@ mongoose.plugin(slug, options);
 const BrandSchema = new Schema({
   name: {
     type: String,
-    trim: true
+    trim: true,
+    description: 'Name of the Brand',
   },
   slug: {
     type: String,

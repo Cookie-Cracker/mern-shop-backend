@@ -53,7 +53,7 @@ const getAllBrands = async (req, res) => {
             isActive: true
         })
 
-        res.json(brands);
+        res.status(200).json(brands);
     } catch (error) {
         res.status(400).json({
             message: 'Your request could not be processed. Please try again.'
@@ -75,28 +75,29 @@ const searchBrands = async (req, res) => {
     return res.json(brands)
 }
 const getById = async (req, res) => {
-    try {
-        const brandId = req.params.id
-        console.log('GET ID')
-        console.log('brandId', brandId)
-        const brandDoc = await Brand.findById(brandId).select('-__v')
-        console.log('brandDoc', brandDoc)
-        if (!brandDoc)
-            return res.status(404).json({
-                message: `Cannot find brand with id: ${brandId}`
-            })
+    // try {
+    const brandId = req.params.id
+    if (!brandId) return res.status(400).json({ message: "Bad request" })
 
-        res.status(200).json({
-            brand: brandDoc
+    const brandDoc = await Brand.findById(brandId).select('-__v')
+    console.log('brandDoc', brandDoc)
+    if (!brandDoc)
+        return res.status(404).json({
+            message: `Cannot find brand with id: ${brandId}`
         })
 
-    } catch (error) {
+    res.status(200).json({
+        brand: brandDoc
+    })
 
-        console.log('error', error)
-        res.status(400).json({
-            message: 'Your request could not be processed. Please try again.'
-        });
-    }
+
+    //  catch (error) {
+
+    //     console.log('error', error)
+    //     res.status(400).json({
+    //         message: 'Your request could not be processed. Please try again.'
+    //     });
+    // }
 }
 
 const addNewBrand = async (req, res) => {
