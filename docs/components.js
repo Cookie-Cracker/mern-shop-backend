@@ -17,10 +17,11 @@ const MongoObjectId = mongoose.model('Id', {
     }
 })
 
-// const brandOption = {
-//     omitFields: ['_id',],
-// }
+const brandOption = {
+    omitFields: ['_id', 'slug', 'image', 'merchant', 'updated', 'created'],
+}
 const brandSchema = mongooseToSwagger(Brand, { omitFields: ['_id'] })
+const newBrandSchema = mongooseToSwagger(Brand, brandOption)
 const errorSchema = mongooseToSwagger(Error, { omitFields: ['_id'] })
 const idSchema = mongooseToSwagger(MongoObjectId)
 
@@ -30,9 +31,18 @@ module.exports = {
     components: {
         schemas: {
             Brand: brandSchema,
+            NewBrand: newBrandSchema,
             Error: errorSchema,
             MongoObjectId: idSchema
 
+        },
+        securitySchemes: {
+            bearerAuth: {
+                type: 'http',
+                scheme: 'bearer',
+                bearerFormat: 'JWT',
+
+            }
         }
     }
 }

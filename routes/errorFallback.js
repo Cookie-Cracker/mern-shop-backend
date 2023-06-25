@@ -11,14 +11,14 @@ module.exports = (app) => {
         next(error);
     });
 
-    app.use( async (error, req, res, next) => {
+    app.use(async (error, req, res, next) => {
         res.status(error.status || 500);
 
         winston.error(`${req.method} ${req.url} ${error}`)
 
         res.json(
             {
-                message: 'There are errors..Something went wrong!!',
+                message: 'There are errors..Something went wrong.',
                 error: {
                     status: error.status,
                     message: `${req.url} ${error.message}`,

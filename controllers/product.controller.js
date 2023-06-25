@@ -141,15 +141,6 @@ const productsByBrandPaginated = async (req, res) => {
 
     if (!brand) return res.status(404).json({ message: `Cant't find brand.` })
 
-    // const products = await Product.aggregate([
-    //     {
-    //         $match: {
-    //             isActive: true,
-    //             brand: brand._id
-    //         }
-    //     }
-    // ])
-
     let q = { brand: brand._id }
     console.log('q', q)
     const { limit, offset } = getPagination(page, size)

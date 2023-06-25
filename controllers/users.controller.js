@@ -38,7 +38,6 @@ const addNewUser = async (req, res) => {
             return;
         }
         const reqRoles = req.body.roles
-        console.log('reqRoles', reqRoles)
         if (reqRoles) {
             Role.find(
                 {

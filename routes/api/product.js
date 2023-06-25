@@ -4,10 +4,11 @@ const mongoose = require('mongoose');
 const Product = require('../../models/product.model');
 const productController = require('../../controllers/product.controller')
 const upload = require('../../upload');
+const { verifyToken } = require('../../middlewares/authJwt');
 
 const router = express.Router();
 
-router.get('/', productController.getAllProducts)
+router.get('/', [verifyToken], productController.getAllProducts)
 router.get('/bybrand', productController.productsByBrand)
 router.get('/bybrandp', productController.productsByBrandPaginated)
 router.get('/search', productController.queryProducts)

@@ -123,47 +123,7 @@ const signIn = async (req, res, next) => {
 
 }
 
-// const refreshToken = async (req, res, next) => {
-//     const { refreshToken: requestToken } = req.body
 
-//     if (requestToken == null) {
-//         return res.status(403).json(errorFunction(true, "Refresh Token Required."))
-//     }
-
-//     try {
-//         let refreshToken = await RefreshToken.findOne({ token: requestToken })
-//         console.log('refresh_token', refreshToken)
-//         if (!refreshToken) {
-//             res.status(403).json(errorFunction(true, "Refresh token unknown."))
-//             return;
-//         }
-
-//         if (RefreshToken.verifyExpiration(refreshToken)) {
-
-//             console.log("expired!!")
-//             RefreshToken.findByIdAndRemove(refreshToken._id, { useFindAndModify: false }).exec();
-
-//             res.status(403).json(errorFunction(true, 'Refresh token expired. Please make a new Signin request.'))
-//             return;
-//         }
-
-//         // all good
-//         //TODO: Ckeck user exists
-//         let user = await User.findById(refreshToken.user._id)
-//         let newAccesstoken = user.generateAuthToken()
-
-//         res.status(200).json({
-//             accessToken: newAccesstoken,
-//             refreshToken: refreshToken.token
-//         })
-
-//     } catch (error) {
-//         console.log('error', error)
-//         res.status(500).json(
-//             errorFunction(true, "Something bad happens!!.", error)
-//         )
-//     }
-// }
 
 const refresh = async (req, res) => {
     const cookies = req.cookies

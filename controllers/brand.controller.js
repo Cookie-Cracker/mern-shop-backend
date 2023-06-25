@@ -102,36 +102,31 @@ const getById = async (req, res) => {
 
 const addNewBrand = async (req, res) => {
 
-    try {
-
-        const { name, description, isActive } = req.body
-        if (!description || !name) {
-            return res
-                .status(400)
-                .json({ message: 'You must enter description & name.' });
-        }
-        let brand = await Brand.findOne({ name: name })
-
-        if (brand)
-            return res.status(400).json({ message: 'Brand already registered!!.' })
 
 
-
-        brand = new Brand({
-            name,
-            description,
-            isActive
-        })
-
-        brand = await brand.save()
-        res.status(201).json({
-            brand
-        })
-    } catch (error) {
-        res.status(400).json({
-            message: 'Your request could not be processed. Please try again.'
-        });
+    const { name, description, isActive } = req.body
+    if (!description || !name) {
+        return res
+            .status(400)
+            .json({ message: 'You must enter description & name.' });
     }
+    let brand = await Brand.findOne({ name: name })
+
+    if (brand)
+        return res.status(409).json({ message: 'Brand already registered!!.' })
+
+
+
+    brand = new Brand({
+        name,
+        description,
+        isActive
+    })
+
+    brand = await brand.save()
+    res.status(201).json({
+        brand
+    })
 
 
 }
